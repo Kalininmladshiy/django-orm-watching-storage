@@ -6,7 +6,7 @@ import datetime
 
 
 def storage_information_view(request):
-    visits = Visit.objects.filter(isnull=True)
+    visits = Visit.objects.filter(leaved_at__isnull=True)
     non_closed_visits = [
         {
             'who_entered': visit.passcard.owner_name,
