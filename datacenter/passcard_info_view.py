@@ -9,7 +9,7 @@ import datetime
 
 def passcard_info_view(request, passcode):
     passcard = get_object_or_404(Passcard, passcode=passcode)
-    visits = Visit.objects.filter(passcard__passcode=passcode)
+    visits = Visit.objects.filter(passcard=passcard)
     this_passcard_visits = [
         {
             'entered_at': django.utils.timezone.localtime(visit.entered_at),
