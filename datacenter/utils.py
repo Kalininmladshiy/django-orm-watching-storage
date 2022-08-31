@@ -2,7 +2,7 @@ import django
 import datetime
 
 
-def get_duration(visit, current_time=django.utils.timezone.localtime()):
+def get_duration(visit, current_time):
     local_visit_time = django.utils.timezone.localtime(visit.entered_at)
     duration = current_time - local_visit_time
     return duration
