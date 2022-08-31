@@ -10,24 +10,16 @@ import datetime
 def passcard_info_view(request, passcode):
     passcard = get_object_or_404(Passcard, passcode=passcode)
     visits = Visit.objects.filter(passcard=passcard)
-    this_passcard_visits = [
-        {
-            'entered_at': django.utils.timezone.localtime(visit.entered_at),
-            'duration': get_format_duration(get_duration(
-                visit,
-                current_time=django.utils.timezone.localtime(visit.leaved_at),
-                )
-                                            ),
-            'is_strange': is_visit_long(get_duration(
-                visit,
-                current_time=django.utils.timezone.localtime(visit.leaved_at),
-                )
-                                        ),
-        }
-        for visit in visits
-    ]
+    this_passcard_visits = []
+    params = {}
+    for visit in visits:
+        params['entered_at'] = django.utils.timezone.localtime(visit.entered_at)
+        params['duration'] = get_format_duration(get_duration(visit, django.utils.timezone.localtime(visit.leaved_at)))
+        params['is_strange'] = is_visit_long(get_duration(visit, django.utils.timezone.localtime(visit.leaved_at)))
+        this_passcard_visits.append(params)
+        params = {}
     context = {
         'passcard': passcard,
         'this_passcard_visits': this_passcard_visits
-    }
+     }
     return render(request, 'passcard_info.html', context)
