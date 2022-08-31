@@ -15,6 +15,7 @@ def storage_information_view(request):
         params['entered_at'] = django.utils.timezone.localtime(visit.entered_at)
         params['duration'] = get_format_duration(get_duration(visit, django.utils.timezone.localtime()))
         non_closed_visits.append(params)
+        params = {}
     context = {
         'non_closed_visits': non_closed_visits,
      }
