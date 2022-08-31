@@ -12,7 +12,11 @@ def storage_information_view(request):
         {
             'who_entered': visit.passcard.owner_name,
             'entered_at': django.utils.timezone.localtime(visit.entered_at),
-            'duration': get_format_duration(get_duration(visit)),
+            'duration': get_format_duration(get_duration(
+                visit,
+                django.utils.timezone.localtime(),
+                )
+                                            ),
             }
         for visit in visits
     ]
