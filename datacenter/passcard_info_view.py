@@ -18,7 +18,6 @@ def passcard_info_view(request, passcode):
             'is_strange': is_visit_long(get_duration(visit, django.utils.timezone.localtime(visit.leaved_at))),
          }
         this_passcard_visits.append(params)
-        params = {}
     context = {
         'passcard': passcard,
         'this_passcard_visits': this_passcard_visits
