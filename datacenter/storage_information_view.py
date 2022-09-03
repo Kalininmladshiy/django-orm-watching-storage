@@ -13,7 +13,7 @@ def storage_information_view(request):
         params = {
             'who_entered': visit.passcard.owner_name,
             'entered_at': django.utils.timezone.localtime(visit.entered_at),
-            'duration': get_format_duration(get_duration(visit, django.utils.timezone.localtime())),
+            'duration': get_format_duration(get_duration(visit)),
          }
         non_closed_visits.append(params)
     context = {

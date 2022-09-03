@@ -1,10 +1,15 @@
 import django
 import datetime
+from datacenter.models import Visit
 
 
-def get_duration(visit, current_time):
+def get_duration(visit):
     local_visit_time = django.utils.timezone.localtime(visit.entered_at)
-    duration = current_time - local_visit_time
+    if visit.leaved_at:
+        end_time = django.utils.timezone.localtime(visit.leaved_at)
+    else:
+        end_time = django.utils.timezone.localtime()
+    duration = end_time - local_visit_time
     return duration
 
 
